@@ -1,5 +1,6 @@
 {
     "require": {
-        "dynamics-tools/dynamics-web-api-php-wrapper": "^1.0"
+        "dynamics-tools/dynamics-web-api-php-wrapper": "^1.0",
+        "ramsey/uuid": "^4.7"
     }
 }

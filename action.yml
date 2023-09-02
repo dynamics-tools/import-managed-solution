@@ -1,5 +1,5 @@
-name: 'Put name to action here'
-description: 'Put description for action here'
+name: 'Import Solution File'
+description: 'Imports a solution file to a Microsoft Dynamics Instance'
 branding:
   icon: 'arrow-up-right'
   color: 'blue'
@@ -15,6 +15,9 @@ inputs:
         required: true
     tenant-id:
         description: 'The Tenant ID of your Azure AD application connected to your Microsoft Dynamics instance app user'
+        required: true
+    solution-file:
+        description: 'The file path or base64 encoded string of the solution file to be imported'
         required: true
 runs:
   using: "composite"
@@ -36,4 +39,5 @@ runs:
         APPLICATION_ID: ${{ inputs.application-id }}
         APPLICATION_SECRET: ${{ inputs.application-secret }}
         TENANT_ID: ${{ inputs.tenant-id }}
+        SOLUTION_FILE: ${{ inputs.solution-file }}
       run: php ${{ github.action_path }}/src/index.php
