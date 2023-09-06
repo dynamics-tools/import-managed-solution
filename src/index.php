@@ -17,6 +17,8 @@ if (str_contains($solutionFileInput, '.zip')) {
 	$base64File = getenv('SOLUTION_FILE');
 }
 
+echo 'The file we\'re working with is: ' . $base64File . PHP_EOL;
+
 $client = Client::createInstance();
 $uuid = Uuid::uuid4();
 $guid = $uuid->toString();
