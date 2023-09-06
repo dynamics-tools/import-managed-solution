@@ -18,6 +18,29 @@ if (str_contains($solutionFileInput, '.zip')) {
 }
 
 echo 'The file we\'re working with is: ' . $base64File . PHP_EOL;
+echo 'now checking into it' . PHP_EOL;
+$decoded = base64_decode($base64File);
+file_put_contents('temp.zip', $decoded);
+
+// 3. Extract the contents of the ZIP file
+$zip = new ZipArchive;
+if ($zip->open('temp.zip') === TRUE) {
+	$extractPath = 'extracted_files';
+	mkdir($extractPath);
+	$zip->extractTo($extractPath);
+	$zip->close();
+}
+
+// 4. List the extracted files
+$files = scandir($extractPath);
+foreach ($files as $file) {
+	if (!in_array($file, ['.', '..'])) {
+		echo $file . PHP_EOL;
+	}
+}
+
+// Optional: Cleanup
+unlink('temp.zip');
 
 $client = Client::createInstance();
 $uuid = Uuid::uuid4();
